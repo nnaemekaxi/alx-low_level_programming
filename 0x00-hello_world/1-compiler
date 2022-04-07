@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc -v
+gcc -Wall -g -c
