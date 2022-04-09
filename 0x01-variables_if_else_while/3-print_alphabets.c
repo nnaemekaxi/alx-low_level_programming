@@ -8,7 +8,7 @@
 int main(void)
 {
 char c = 'a';
-while ( <= 'z')
+while ( c <= 'z')
 {
 putchar(c);
 c++;
