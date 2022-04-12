@@ -9,18 +9,5 @@
 
 int _islower(int c)
 {
-	int c;
-	char l;
-	int l;
-
-	l = getchar();
-	if (l == 99)
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-}
-	return (0);
+	return (c >= 97 && c <= 122);
 }
