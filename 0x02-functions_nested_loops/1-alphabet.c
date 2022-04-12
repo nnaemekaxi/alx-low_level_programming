@@ -2,9 +2,9 @@
 #include "main.h"
 
 /**
- * main - check the code
+ * print_alphabet - function prints alphabet
  *
- * Return: Always 0
+ * Return: void
  */
 
 void print_alphabet(void)
@@ -16,5 +16,4 @@ void print_alphabet(void)
 		_putchar(a);
 	}
 	_putchar('\n');
-
 }
