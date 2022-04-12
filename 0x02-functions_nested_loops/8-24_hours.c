@@ -24,7 +24,7 @@ while (xx <= 2)
 		z = 3;
 	}
 	x = 0;
-	while (x <= a)
+	while (x <= z)
 	{
 		yy = 0;
 		while (yy <= 5)
