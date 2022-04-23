@@ -2,12 +2,12 @@
 /**
  * _strcat - concatenates two strings
  * @dest: input parameter 'string'
- * @str: input parameter 'string'
+ * @src: input parameter 'string'
  *
  * Return: dest
  */
 
-char *_strcat(char *dest, char *str)
+char *_strcat(char *dest, char *src)
 {
 	int x;
 	int y;
