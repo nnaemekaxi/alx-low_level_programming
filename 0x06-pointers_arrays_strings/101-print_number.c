@@ -8,16 +8,31 @@
 void print_number(int n)
 {
 	unsigned int x;
+	unsigned int y;
+	unsigned int z;
 
 	if (n < 0)
 	{
 		_putchar(45);
-		x = -x;
+		x = n * -1;
 	}
-	if (x / 10)
+	else
 	{
-		print_number(x / 10);
+		x = n;
 	}
-	_putchar((x % 10) + '48');
+
+	y = x;
+	z = 1;
+
+	while (y > 9)
+	{
+		y = y / 10;
+		z *= 10;
+	}
+
+	for (; z >= 1; z /= 10)
+	{
+		_putchar(((x / z) % 10) + 48);
+	}
 }
 
