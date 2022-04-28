@@ -50,5 +50,5 @@ int is_palindrome(char *s)
 	int l;
 
 	l = function_1(n);
-	return (check_lenght(n, l));
+	return (check_lenght(s, l));
 }
