@@ -23,7 +23,7 @@ int function_1(char *n)
  *
  * Return: Always 0.
  */
-int check_lenght(char *n, int l)
+int compare(char *n, int l)
 {
 	if (l <= 0)
 	{
@@ -31,7 +31,7 @@ int check_lenght(char *n, int l)
 	}
 	if (*n == *(n + (l - 1)))
 	{
-		return (check_length(n + 1, l - 2));
+		return (compare(n + 1, l - 2));
 	}
 	else
 	{
@@ -50,5 +50,5 @@ int is_palindrome(char *s)
 	int l;
 
 	l = function_1(n);
-	return (check_lenght(s, l));
+	return (compare(s, l));
 }
