@@ -38,14 +38,14 @@ void _print(char *str, int size)
  */
 char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 {
-	int x, y, multi, multipl, add, addit;
+	int x, y, mul, multipl, add, addit;
 
 	multipl = addit = 0;
 	for (x = num_index, y = dest_index; x >= 0; x--, y--)
 	{
-		multi = (n - '0') * (num[x] - '0') + multipl;
-		multipl = multi / 10;
-		add = (dest[y] - '0') + (multi % 10) + addit;
+		mul = (n - '0') * (num[x] - '0') + multipl;
+		multipl = mul / 10;
+		add = (dest[y] - '0') + (mul % 10) + addit;
 		addit = add / 10;
 		dest[y] = add % 10 + '0';
 	}
