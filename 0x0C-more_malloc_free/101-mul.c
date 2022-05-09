@@ -4,22 +4,22 @@
 /**
  * _print - moves a string one place to the left and prints the string
  * @str: string to move
- * @size: size of string
+ * @l: size of string
  *
  * Return: void
  */
-void _print(char *str, int size)
+void _print(char *str, int l)
 {
-	int x, y;
+	int i, j;
 
-	x = y = 0;
-	while (x < size)
+	i = j = 0;
+	while (i < l)
 	{
-		if (str[x] != '0')
-			y = 1;
-		if (y || x == size - 1)
-			_putchar(str[x]);
-		x++;
+		if (str[i] != '0')
+			j = 1;
+		if (j || i == l - 1)
+			_putchar(str[i]);
+		i++;
 	}
 
 	_putchar('\n');
@@ -38,44 +38,44 @@ void _print(char *str, int size)
  */
 char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 {
-	int x, y, mul, multipl, add, addit;
+	int j, k, mul, mulrem, add, addrem;
 
-	multipl = addit = 0;
-	for (x = num_index, y = dest_index; x >= 0; x--, y--)
+	mulrem = addrem = 0;
+	for (j = num_index, k = dest_index; j >= 0; j--, k--)
 	{
-		mul = (n - '0') * (num[x] - '0') + multipl;
-		multipl = mul / 10;
-		add = (dest[y] - '0') + (mul % 10) + addit;
-		addit = add / 10;
-		dest[y] = add % 10 + '0';
+		mul = (n - '0') * (num[j] - '0') + mulrem;
+		mulrem = mul / 10;
+		add = (dest[k] - '0') + (mul % 10) + addrem;
+		addrem = add / 10;
+		dest[k] = add % 10 + '0';
 	}
-	for (addit += multipl; y >= 0 && addit; y--)
+	for (addrem += mulrem; k >= 0 && addrem; k--)
 	{
-		add = (dest[y] - '0') + addit;
-		addit = add / 10;
-		dest[y] = add % 10 + '0';
+		add = (dest[k] - '0') + addrem;
+		addrem = add / 10;
+		dest[k] = add % 10 + '0';
 	}
-	if (addit)
+	if (addrem)
 	{
 		return (NULL);
 	}
 	return (dest);
 }
 /**
- * confirm_digits_input - checks the arguments to ensure they are digits
+ * check_for_digits - checks the arguments to ensure they are digits
  * @av: pointer to arguments
  *
  * Return: 0 if digits, 1 if not
  */
-int confirm_digits_input(char **av)
+int check_for_digits(char **av)
 {
-	int x, y;
+	int i, j;
 
-	for (x = 1; x < 3; x++)
+	for (i = 1; i < 3; i++)
 	{
-		for (y = 0; av[x][y]; y++)
+		for (j = 0; av[i][j]; j++)
 		{
-			if (av[x][y] < '0' || av[x][y] > '9')
+			if (av[i][j] < '0' || av[i][j] > '9')
 				return (1);
 		}
 	}
@@ -83,23 +83,23 @@ int confirm_digits_input(char **av)
 }
 
 /**
- * initialize - initializes a string
+ * init - initializes a string
  * @str: sting to initialize
- * @len: length of strinf
+ * @l: length of strinf
  *
  * Return: void
  */
-void initialize(char *str, int len)
+void init(char *str, int l)
 {
-	int x;
+	int i;
 
-	for (x = 0; x < len; x++)
-		str[x] = '0';
-	str[x] = '\0';
+	for (i = 0; i < l; i++)
+		str[i] = '0';
+	str[i] = '\0';
 }
 
 /**
- * main - multiplies two numbers
+ * main - multiply two numbers
  * @argc: number of arguments
  * @argv: argument vector
  *
@@ -107,41 +107,41 @@ void initialize(char *str, int len)
  */
 int main(int argc, char *argv[])
 {
-	int x, xx, y, yy, z;
-	char *ptra;
-	char *ptrb;
+	int l1, l2, ln, ti, i;
+	char *a;
+	char *t;
 	char e[] = "Error\n";
 
-	if (argc != 3 || confirm_digits_input(argv))
+	if (argc != 3 || check_for_digits(argv))
 	{
-		for (yy = 0; e[yy]; yy++)
-			_putchar(e[yy]);
+		for (ti = 0; e[ti]; ti++)
+			_putchar(e[ti]);
 		exit(98);
 	}
-	for (x = 0; argv[1][x]; x++)
+	for (l1 = 0; argv[1][l1]; l1++)
 		;
-	for (xx = 0; argv[2][xx]; xx++)
+	for (l2 = 0; argv[2][l2]; l2++)
 		;
-	y = x + xx + 1;
-	ptra = malloc(y * sizeof(char));
-	if (ptra == NULL)
+	ln = l1 + l2 + 1;
+	a = malloc(ln * sizeof(char));
+	if (a == NULL)
 	{
-		for (yy = 0; e[yy]; yy++)
-			_putchar(e[yy]);
+		for (ti = 0; e[ti]; ti++)
+			_putchar(e[ti]);
 		exit(98);
 	}
-	initialize(ptra, y - 1);
-	for (yy = xx - 1, z = 0; yy >= 0; yy--, z++)
+	init(a, ln - 1);
+	for (ti = l2 - 1, i = 0; ti >= 0; ti--, i++)
 	{
-		ptrb = mul(argv[2][yy], argv[1], x - 1, ptra, (y - 2) - z);
-		if (ptrb == NULL)
+		t = mul(argv[2][ti], argv[1], l1 - 1, a, (ln - 2) - i);
+		if (t == NULL)
 		{
-			for (yy = 0; e[yy]; yy++)
-				_putchar(e[yy]);
-			free(ptra);
+			for (ti = 0; e[ti]; ti++)
+				_putchar(e[ti]);
+			free(a);
 			exit(98);
 		}
 	}
-	_print(ptra, y - 1);
+	_print(a, ln - 1);
 	return (0);
 }
