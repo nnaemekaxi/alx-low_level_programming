@@ -43,7 +43,7 @@ char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 	multipl = addit = 0;
 	for (x = num_index, y = dest_index; x >= 0; x--, y--)
 	{
-		multi = (n - '0') * (num[j] - '0') + multipl;
+		multi = (n - '0') * (num[x] - '0') + multipl;
 		multipl = multi / 10;
 		add = (dest[y] - '0') + (multi % 10) + addit;
 		addit = add / 10;
@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 	for (xx = 0; argv[2][xx]; xx++)
 		;
 	y = x + xx + 1;
-	ptra = malloc(ln * sizeof(char));
+	ptra = malloc(y * sizeof(char));
 	if (ptra == NULL)
 	{
 		for (yy = 0; e[yy]; yy++)
