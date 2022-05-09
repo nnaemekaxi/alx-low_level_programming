@@ -4,22 +4,22 @@
 /**
  * _print - moves a string one place to the left and prints the string
  * @str: string to move
- * @l: size of string
+ * @size: size of string
  *
  * Return: void
  */
-void _print(char *str, int l)
+void _print(char *str, int size)
 {
-	int i, j;
+	int x, y;
 
-	i = j = 0;
-	while (i < l)
+	x = y = 0;
+	while (x < size)
 	{
-		if (str[i] != '0')
-			j = 1;
-		if (j || i == l - 1)
-			_putchar(str[i]);
-		i++;
+		if (str[x] != '0')
+			y = 1;
+		if (y || x == size - 1)
+			_putchar(str[x]);
+		x++;
 	}
 
 	_putchar('\n');
@@ -38,44 +38,44 @@ void _print(char *str, int l)
  */
 char *mul(char n, char *num, int num_index, char *dest, int dest_index)
 {
-	int j, k, mul, mulrem, add, addrem;
+	int x, y, mul, multipl, add, addit;
 
-	mulrem = addrem = 0;
-	for (j = num_index, k = dest_index; j >= 0; j--, k--)
+	multipl = addit = 0;
+	for (x = num_index, y = dest_index; x >= 0; x--, y--)
 	{
-		mul = (n - '0') * (num[j] - '0') + mulrem;
-		mulrem = mul / 10;
-		add = (dest[k] - '0') + (mul % 10) + addrem;
-		addrem = add / 10;
-		dest[k] = add % 10 + '0';
+		mul = (n - '0') * (num[x] - '0') + multipl;
+		multipl = mul / 10;
+		add = (dest[y] - '0') + (mul % 10) + addit;
+		addit = add / 10;
+		dest[y] = add % 10 + '0';
 	}
-	for (addrem += mulrem; k >= 0 && addrem; k--)
+	for (addit += multipl; y >= 0 && addit; y--)
 	{
-		add = (dest[k] - '0') + addrem;
-		addrem = add / 10;
-		dest[k] = add % 10 + '0';
+		add = (dest[y] - '0') + addit;
+		addit = add / 10;
+		dest[y] = add % 10 + '0';
 	}
-	if (addrem)
+	if (addit)
 	{
 		return (NULL);
 	}
 	return (dest);
 }
 /**
- * check_for_digits - checks the arguments to ensure they are digits
+ * confirm_digits_input - checks the arguments to ensure they are digits
  * @av: pointer to arguments
  *
  * Return: 0 if digits, 1 if not
  */
-int check_for_digits(char **av)
+int confirm_digits_input(char **av)
 {
-	int i, j;
+	int x, y;
 
-	for (i = 1; i < 3; i++)
+	for (x = 1; x < 3; x++)
 	{
-		for (j = 0; av[i][j]; j++)
+		for (y = 0; av[x][y]; y++)
 		{
-			if (av[i][j] < '0' || av[i][j] > '9')
+			if (av[x][y] < '0' || av[x][y] > '9')
 				return (1);
 		}
 	}
@@ -83,23 +83,23 @@ int check_for_digits(char **av)
 }
 
 /**
- * init - initializes a string
+ * initialize - initializes a string
  * @str: sting to initialize
- * @l: length of strinf
+ * @len: length of strinf
  *
  * Return: void
  */
-void init(char *str, int l)
+void initialize(char *str, int len)
 {
-	int i;
+	int x;
 
-	for (i = 0; i < l; i++)
-		str[i] = '0';
-	str[i] = '\0';
+	for (x = 0; x < len; x++)
+		str[x] = '0';
+	str[x] = '\0';
 }
 
 /**
- * main - multiply two numbers
+ * main - multiplies two numbers
  * @argc: number of arguments
  * @argv: argument vector
  *
@@ -107,41 +107,41 @@ void init(char *str, int l)
  */
 int main(int argc, char *argv[])
 {
-	int l1, l2, ln, ti, i;
-	char *a;
-	char *t;
+	int x, xx, y, yy, z;
+	char *ptra;
+	char *ptrb;
 	char e[] = "Error\n";
 
-	if (argc != 3 || check_for_digits(argv))
+	if (argc != 3 || confirm_digits_input(argv))
 	{
-		for (ti = 0; e[ti]; ti++)
-			_putchar(e[ti]);
+		for (yy = 0; e[yy]; yy++)
+			_putchar(e[yy]);
 		exit(98);
 	}
-	for (l1 = 0; argv[1][l1]; l1++)
+	for (x = 0; argv[1][x]; x++)
 		;
-	for (l2 = 0; argv[2][l2]; l2++)
+	for (xx = 0; argv[2][xx]; xx++)
 		;
-	ln = l1 + l2 + 1;
-	a = malloc(ln * sizeof(char));
-	if (a == NULL)
+	y = x + xx + 1;
+	ptra = malloc(y * sizeof(char));
+	if (ptra == NULL)
 	{
-		for (ti = 0; e[ti]; ti++)
-			_putchar(e[ti]);
+		for (yy = 0; e[yy]; yy++)
+			_putchar(e[yy]);
 		exit(98);
 	}
-	init(a, ln - 1);
-	for (ti = l2 - 1, i = 0; ti >= 0; ti--, i++)
+	initialize(ptra, y - 1);
+	for (yy = xx - 1, z = 0; yy >= 0; yy--, z++)
 	{
-		t = mul(argv[2][ti], argv[1], l1 - 1, a, (ln - 2) - i);
-		if (t == NULL)
+		ptrb = mul(argv[2][yy], argv[1], x - 1, ptra, (y - 2) - z);
+		if (ptrb == NULL)
 		{
-			for (ti = 0; e[ti]; ti++)
-				_putchar(e[ti]);
-			free(a);
+			for (yy = 0; e[yy]; yy++)
+				_putchar(e[yy]);
+			free(ptra);
 			exit(98);
 		}
 	}
-	_print(a, ln - 1);
+	_print(ptra, y - 1);
 	return (0);
 }
