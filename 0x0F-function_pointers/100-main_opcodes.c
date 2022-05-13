@@ -11,6 +11,7 @@
 void print_opcodes(char *a, int n)
 {
 	int x;
+
 	for (x = 0; x < n; x++)
 	{
 		printf("%.2hhx", a[x]);
