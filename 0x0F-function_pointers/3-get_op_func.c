@@ -23,7 +23,7 @@ int (*get_op_func(char *s))(int, int)
 	for (x = 0; ops[x].op != NULL; x++)
 	{
 		if (!strcmp(ops[x].op, s))
-			return (ops[x].f);
+			return (ops[x].s);
 	}
 	return (NULL);
 }
