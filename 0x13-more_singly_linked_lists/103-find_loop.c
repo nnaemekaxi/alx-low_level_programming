@@ -24,7 +24,7 @@ listint_t *find_listint_loop(listint_t *head)
 		}
 	}
 
-	if (list_one || !list_two || !list_two->next)
+	if (!list_one || !list_two || !list_two->next)
 		return (NULL);
 	while (list_one != list_two)
 	{
