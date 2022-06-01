@@ -2,11 +2,11 @@
 #include <stdio.h>
 
 /**
- * _error - function reads file.
+ * error_reader - function reads file.
  * @err: Error number
  * @filename: File name
  */
-void _error(int err, char *filename)
+void error_reader(int err, char *filename)
 {
 	if (err == 98)
 	{
@@ -20,13 +20,13 @@ void _error(int err, char *filename)
 	}
 }
 /**
- * cp - program copies the content of a file to another file
+ * file_copier - function copies the content of a file to another file
  * @file_from: Name of the source file.
  * @file_to: Name of the destination file.
  *
  * Return: 1 on success, -1 on failure.
  */
-void cp(char *file_from, char *file_to)
+void file_copier(char *file_from, char *file_to)
 {
 	int file_read, x_read, file_write, x_write;
 	char *buffer[1024];
@@ -34,23 +34,23 @@ void cp(char *file_from, char *file_to)
 	/* READ */
 	file_read = open(file_from, O_RDONLY);
 	if (file_read < 0)
-		_error(98, file_from);
+		error_reader(98, file_from);
 	/* WRITE */
 	file_write = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	if (file_write < 0)
 	{
 		close(file_read);
-		_error(99, file_to);
+		error_reader(99, file_to);
 	}
 	do {
 		/* READ */
 		x_read = read(file_read, buffer, 1024);
 		if (x_read < 0)
-			_error(98, file_from);
+			error_reader(98, file_from);
 		/* WRITE */
 		x_write = write(file_write, buffer, x_read);
 		if (x_write < x_read)
-			_error(99, file_to);
+			error_reader(99, file_to);
 	}	while (x_write == 1024);
 	if (close(file_read) < 0)
 	{
@@ -66,12 +66,12 @@ void cp(char *file_from, char *file_to)
 }
 /**
  * main - main function
- * @ac: Argument count
- * @av: argument values
+ * @argc: Argument count
+ * @argv: argument values
  *
  * Return: 0 on success, -1 on error.
  */
- 
+
 int main(int argc, char *argv[])
 {
 	if (argc != 3)
@@ -79,6 +79,6 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	cp(argv[1], argv[2]);
+	file_copier(argv[1], argv[2]);
 	return (0);
 }
