@@ -12,8 +12,8 @@ size_t _strlen(char *str)
 
 	iter = 0;
 	while (str[iter])
-		i++;
-	return (i);
+		iter++;
+	return (iter);
 }
 
 /**
@@ -35,7 +35,7 @@ int create_file(const char *filename, char *text_content)
 	if (file_d == -1)
 		return (-1);
 	if (text_content != NULL)
-		lent = write(fd, text_content, _strlen(text_content));
+		lent = write(file_d, text_content, _strlen(text_content));
 	close(file_d);
 	if (lent == -1)
 		return (-1);
